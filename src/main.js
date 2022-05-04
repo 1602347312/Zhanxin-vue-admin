@@ -14,6 +14,7 @@ import router from './router'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+import axios from 'axios'
 
 /**
  * If you don't want to use mock-server
@@ -35,8 +36,11 @@ Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
 
+Vue.prototype.$axios = axios
+
 new Vue({
   el: '#app',
+  axios,
   router,
   store,
   render: h => h(App)

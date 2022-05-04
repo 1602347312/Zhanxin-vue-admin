@@ -56,95 +56,83 @@ export const constantRoutes = [
   },
 
   {
-    path: '/example',
+    path: '/audit',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    redirect: '/audit/crime',
+    name: 'Audit',
+    meta: { title: 'Audit', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'crime',
+        name: 'Crime',
+        component: () => import('@/views/crime/index'),
+        meta: { title: 'Crime', icon: 'table' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        path: 'blood',
+        name: 'Blood',
+        component: () => import('@/views/blood/index'),
+        meta: { title: 'Blood', icon: 'tree' }
+      },
+      {
+        path: 'phoneCost',
+        name: 'PhoneCost',
+        component: () => import('@/views/phoneCost/index'),
+        meta: { title: 'PhoneCost', icon: 'tree' }
       }
     ]
   },
-
   {
-    path: '/form',
+    path: '/manage',
     component: Layout,
     children: [
       {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        path: 'accounts',
+        name: 'Accounts',
+        component: () => import('@/views/accountManage/index'),
+        meta: { title: 'Accounts', icon: 'form' }
       }
     ]
   },
-
   {
-    path: '/nested',
+    path: '/videos',
     component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
+    redirect: '/videos/fundamental',
+    name: 'Videos',
     meta: {
-      title: 'Nested',
+      title: 'Videos',
       icon: 'nested'
     },
     children: [
       {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
+        path: 'fundamental',
+        component: () => import('@/views/videoManage/fundamental/index'), // Parent router-view
+        name: 'Fundamental',
+        meta: { title: 'fundamental' }
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
+        path: 'financial',
+        component: () => import('@/views/videoManage/financial/index'),
+        name: 'Financial',
+        meta: { title: 'financial' }
+      },
+      {
+        path: 'honesty',
+        component: () => import('@/views/videoManage/honesty/index'),
+        name: 'Honesty',
+        meta: { title: 'honesty' }
+      }
+    ]
+  },
+  {
+    path: '/videos',
+    component: Layout,
+    children: [
+      {
+        path: 'upload',
+        name: 'Upload',
+        component: () => import('@/views/upload/index'),
+        meta: { title: 'Upload', icon: 'form' }
       }
     ]
   },
