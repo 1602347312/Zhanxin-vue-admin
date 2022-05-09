@@ -43,7 +43,7 @@
     </el-table>
     <el-button-group>
       <el-button type="primary" icon="el-icon-arrow-left" @click="leftClick">上一页</el-button>
-      <el-button type="primary" @click="rightClick">下一页<i class="el-icon-arrow-right el-icon--right" /></el-button>
+      <el-button type="primary" @click="rightClick" >下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
     </el-button-group>
   </div>
 </template>
@@ -65,11 +65,12 @@ export default {
     return {
       list: null,
       listLoading: true,
-      type: 'blood',
+      type: 'phone',
       status: ['待审核', '已通过', '未通过'],
       pageNum: 1,
       listSize: 0,
-      pageSize: 10
+      pageSize: 10,
+      reputationType: 'phone_cost'
     }
   },
   created() {
@@ -145,7 +146,9 @@ export default {
           url: 'http://101.132.121.193:8899/admin/certificates',
           params: {
             id: id,
-            state: 1
+            state: 1,
+            num: 0,
+            type: this.reputationType
           }
         }).then(() => {
           this.$message({
@@ -161,7 +164,9 @@ export default {
             url: 'http://101.132.121.193:8899/admin/certificates',
             params: {
               id: id,
-              state: 2
+              state: 2,
+              num: 1,
+              type: this.reputationType
             }
           }).then(() => {
             this.$message({

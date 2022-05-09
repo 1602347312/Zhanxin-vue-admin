@@ -74,7 +74,8 @@ export default {
       status: ['待审核', '已通过', '未通过'],
       pageNum: 1,
       listSize: 0,
-      pageSize: 10
+      pageSize: 10,
+      reputationType: 'criminal'
     }
   },
   created() {
@@ -150,7 +151,9 @@ export default {
           url: 'http://101.132.121.193:8899/admin/certificates',
           params: {
             id: id,
-            state: 1
+            state: 1,
+            num: 0,
+            type: this.reputationType
           }
         }).then(() => {
           this.$message({
@@ -166,7 +169,9 @@ export default {
             url: 'http://101.132.121.193:8899/admin/certificates',
             params: {
               id: id,
-              state: 2
+              state: 2,
+              num: 1,
+              type: this.reputationType
             }
           }).then(() => {
             this.$message({

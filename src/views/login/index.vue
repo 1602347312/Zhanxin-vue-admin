@@ -53,29 +53,25 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
 
 export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
-      } else {
-        callback()
+      if (!value) {
+        return callback(new Error('用户邮箱不能为空!'))
       }
     }
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
-      } else {
-        callback()
+      if (!value) {
+        return callback(new Error('密码不能为空!'))
       }
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        username: '',
+        password: '',
+        type: 1
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -106,20 +102,38 @@ export default {
       })
     },
     handleLogin() {
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
+      // this.$axios({
+      //   method: 'post',
+      //   url: 'http://101.132.121.193:8899/user/login',
+      //   params: {
+      //     userEmail: this.loginForm.username,
+      //     userPassword: this.loginForm.password,
+      //     userType: this.loginForm.type
+      //   }
+      // }).then(res => {
+      //   console.log(res.data.msg)
+      //   if (res.data.msg === '登录成功') {
+      //     console.log(res)
+      //     window.sessionStorage.setItem('token', res.data.token)
           this.loading = true
+          // this.$router.push({ path: '/' })
+          // console.log(1)
+          // this.loading = false
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
+            console.log(1)
+            console.log(this.$router)
             this.loading = false
           }).catch(() => {
             this.loading = false
           })
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
+        // } else {
+        //   this.$message({
+        //     showClose: true,
+        //     message: '登录失败!'
+        //   })
+        // }
+      // })
     }
   }
 }

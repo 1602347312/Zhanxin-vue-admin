@@ -65,20 +65,32 @@ export const constantRoutes = [
       {
         path: 'crime',
         name: 'Crime',
-        component: () => import('@/views/crime/index'),
+        component: () => import('@/views/auditManage/crime/index'),
         meta: { title: 'Crime', icon: 'table' }
       },
       {
         path: 'blood',
         name: 'Blood',
-        component: () => import('@/views/blood/index'),
+        component: () => import('@/views/auditManage/blood/index'),
         meta: { title: 'Blood', icon: 'tree' }
       },
       {
         path: 'phoneCost',
         name: 'PhoneCost',
-        component: () => import('@/views/phoneCost/index'),
+        component: () => import('@/views/auditManage/phoneCost/index'),
         meta: { title: 'PhoneCost', icon: 'tree' }
+      },
+      {
+        path: 'donation',
+        name: 'Donation',
+        component: () => import('@/views/auditManage/donation/index'),
+        meta: { title: 'Donation', icon: 'tree' }
+      },
+      {
+        path: 'volunteer',
+        name: 'Volunteer',
+        component: () => import('@/views/auditManage/volunteer/index'),
+        meta: { title: 'Volunteer', icon: 'tree' }
       }
     ]
   },

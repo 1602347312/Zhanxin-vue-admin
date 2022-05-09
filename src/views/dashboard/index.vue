@@ -44,8 +44,8 @@ export default {
     getSysinfo() {
       this.$axios({
         method: 'get',
-        url: 'http://101.132.121.193:8899/admin/metrics/sysinfo'
-        // headers: { token: window.sessionStorage.getItem('token') }
+        url: 'http://101.132.121.193:8899/admin/metrics/sysinfo',
+        headers: { token: window.sessionStorage.getItem('token') }
       }).then(response => {
         this.cpuCore = response.data.data.cpuCore
         this.cpuUsage = response.data.data.cpuUsage

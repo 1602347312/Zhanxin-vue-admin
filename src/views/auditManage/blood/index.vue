@@ -35,15 +35,15 @@
       </el-table-column>
       <el-table-column align="center" prop="created_at" label="Action" width="200">
         <template slot-scope="scope">
-          <!--          <i class="el-icon-time" />-->
-          <!--          <span>{{ scope.row.display_time }}</span>-->
-          <el-button type="text" :disabled="scope.row.state" @click="open(scope.row.certicficateId)">审核</el-button>
+          <el-input v-model="validCount" placeholder="请输入内容" :disabled="Boolean(scope.row.state)" class="input-with-select">
+            <el-button slot="append" type="text" :disabled="Boolean(scope.row.state)" class="audit-button" @click="open(scope.row.certicficateId)">审核</el-button>
+          </el-input>
         </template>
       </el-table-column>
     </el-table>
     <el-button-group>
       <el-button type="primary" icon="el-icon-arrow-left" @click="leftClick">上一页</el-button>
-      <el-button type="primary" @click="rightClick" >下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+      <el-button type="primary" @click="rightClick">下一页<i class="el-icon-arrow-right el-icon--right" /></el-button>
     </el-button-group>
   </div>
 </template>
@@ -65,11 +65,13 @@ export default {
     return {
       list: null,
       listLoading: true,
-      type: 'phone',
+      type: 'blood',
       status: ['待审核', '已通过', '未通过'],
       pageNum: 1,
       listSize: 0,
-      pageSize: 10
+      pageSize: 10,
+      reputationType: 'blood_donation',
+      validCount: 0
     }
   },
   created() {
@@ -145,13 +147,16 @@ export default {
           url: 'http://101.132.121.193:8899/admin/certificates',
           params: {
             id: id,
-            state: 1
+            state: 1,
+            num: this.validCount,
+            type: this.reputationType
           }
         }).then(() => {
           this.$message({
             type: 'success',
             message: '审核通过!'
           })
+          this.validCount = 0
           this.fetchData()
         })
       }).catch((action) => {
@@ -161,13 +166,16 @@ export default {
             url: 'http://101.132.121.193:8899/admin/certificates',
             params: {
               id: id,
-              state: 2
+              state: 2,
+              num: 0,
+              type: this.reputationType
             }
           }).then(() => {
             this.$message({
               type: 'error',
               message: '审核不通过!'
             })
+            this.validCount = 0
             this.fetchData()
           })
         } else {

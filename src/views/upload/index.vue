@@ -11,12 +11,13 @@
           action="https://jsonplaceholder.typicode.com/posts/"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
-          :file-list="coverList"
+          :file-list="form.coverList"
           :auto-upload="false"
           list-type="picture"
           :limit="1"
           :on-change="addCover"
           :on-exceed="handleExceed"
+          accept=".jpg,.png,.bmp"
         >
           <el-button slot="trigger" size="small" type="primary" class="upload-button2">选取文件</el-button>
           <div slot="tip" class="el-upload__tip">只能上传jpg/png/bmp文件</div>
@@ -29,15 +30,16 @@
           action="https://jsonplaceholder.typicode.com/posts/"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
-          :file-list="videoList"
+          :file-list="form.videoList"
           :auto-upload="false"
           list-type="text"
           :limit="1"
           :on-change="addVideo"
           :on-exceed="handleExceed"
+          accept=".mp4"
         >
           <el-button slot="trigger" size="small" type="primary" class="upload-button1">选取文件</el-button>
-          <el-button style="margin-left: 10px;" size="small" type="success" class="submit-button" @click="submitUpload">上传到服务器</el-button>
+          <el-button style="margin-left: 10px;" size="small" type="success" class="submit-button" :disabled="uploading" @click="submitUpload">上传到服务器</el-button>
           <div slot="tip" class="el-upload__tip">大小限制为50mb</div>
         </el-upload>
       </el-form-item>
@@ -66,7 +68,8 @@ export default {
         coverList: [],
         videoList: [],
         fd: new FormData()
-      }
+      },
+      uploading: false
     }
   },
   methods: {
@@ -79,6 +82,7 @@ export default {
       this.form.fd.append('video', fileObj)// 文件对象
     },
     submitUpload() {
+      this.uploading = true
       this.$refs.upload2.submit()
       this.form.fd.append('title', this.form.name)
       this.form.fd.append('intro', this.form.intro)
@@ -96,10 +100,12 @@ export default {
         this.form.type = ''
         this.form.intro = ''
         this.form.name = ''
+        this.uploading = false
         console.log(response)
       }).catch((reason) => {
         this.$message({ type: 'error', message: '上传失败' })
         this.form.fd = new FormData()
+        this.uploading = false
         console.log(reason)
       })
     },

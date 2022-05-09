@@ -3,7 +3,7 @@
     <el-backtop >
       <i class="el-icon-caret-top"/>
     </el-backtop>
-    <el-row>
+    <el-row v-loading="listLoading">
       <el-col v-for="(video, index) in videoList" :key="index" :span="5" :offset="2">
         <el-card :body-style="{ padding: '0px' }">
           <img :src="video.videoCover" class="image">
@@ -36,7 +36,8 @@ export default {
       title: '',
       uploadTime: '',
       coverUrl: '',
-      videoList: []
+      videoList: [],
+      listLoading: true
     }
   },
   created() {
