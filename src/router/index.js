@@ -150,12 +150,14 @@ export const constantRoutes = [
   },
 
   {
-    path: 'external-link',
+    path: '/message',
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'message',
+        name: 'message',
+        component: () => import('@/views/message/message'),
+        meta: { title: 'System Message', icon: 'table' }
       }
     ]
   },
