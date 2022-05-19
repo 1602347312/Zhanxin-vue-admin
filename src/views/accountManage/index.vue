@@ -224,15 +224,14 @@ export default {
     },
     verifyIdentity(id) {
       this.$axios({
-        method: 'post',
-        url: 'http://101.132.121.193:8899/user/login',
+        method: 'get',
+        url: 'http://101.132.121.193:8899/user/verify',
         params: {
           userEmail: this.managerEmail,
-          userPassword: this.managerPassword,
-          userType: 1
+          userPassword: this.managerPassword
         }
       }).then(response => {
-        if (response.data.msg === '登录成功') {
+        if (response.data.code === '200') {
           this.$axios({
             method: 'delete',
             url: 'http://101.132.121.193:8899/admin/accounts',
