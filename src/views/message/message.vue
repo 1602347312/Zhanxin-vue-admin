@@ -26,6 +26,13 @@ export default {
     }
   },
   methods: {
+    open1() {
+      this.$notify({
+        title: '成功',
+        message: '发布成功！',
+        type: 'success'
+      })
+    },
     clear() {
       this.textarea1 = ''
       this.textarea2 = ''
@@ -40,6 +47,11 @@ export default {
         }
       }).then(res => {
         console.log(res)
+        if (res.data.data.computeResult === 1) {
+          this.textarea1 = ''
+          this.textarea2 = ''
+          this.open1()
+        }
       })
     }
   }
