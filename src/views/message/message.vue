@@ -33,7 +33,7 @@ export default {
     release() {
       this.$axios({
         method: 'post',
-        url: 'http://localhost:8888/systemMessage/releaseMessage',
+        url: 'http://localhost:8899/systemMessage/releaseMessage',
         params: {
           messageTitle: this.textarea1,
           messageContent: this.textarea2
