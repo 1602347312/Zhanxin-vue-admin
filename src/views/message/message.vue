@@ -26,6 +26,13 @@ export default {
     }
   },
   methods: {
+    open1() {
+      this.$notify({
+        title: '成功',
+        message: '发布成功！',
+        type: 'success'
+      })
+    },
     clear() {
       this.textarea1 = ''
       this.textarea2 = ''
@@ -33,13 +40,18 @@ export default {
     release() {
       this.$axios({
         method: 'post',
-        url: 'http://localhost:8888/systemMessage/releaseMessage',
+        url: 'http://localhost:8899/systemMessage/releaseMessage',
         params: {
           messageTitle: this.textarea1,
           messageContent: this.textarea2
         }
       }).then(res => {
         console.log(res)
+        if (res.data.data.computeResult === 1) {
+          this.textarea1 = ''
+          this.textarea2 = ''
+          this.open1()
+        }
       })
     }
   }
