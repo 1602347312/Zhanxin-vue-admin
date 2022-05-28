@@ -60,8 +60,9 @@ const actions = {
         commit('SET_NAME', response.data.userName)
         commit('SET_AVATAR', response.data.userAvatar)
         resolve(data)
-      }).catch(error => {
-        reject(error)
+      }).catch(() => {
+        commit('SET_NAME', null)
+        commit('SET_AVATAR', null)
       })
     })
   },
