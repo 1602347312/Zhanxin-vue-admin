@@ -72,25 +72,25 @@ export const constantRoutes = [
         path: 'blood',
         name: 'Blood',
         component: () => import('@/views/auditManage/blood/index'),
-        meta: { title: 'Blood', icon: 'tree' }
+        meta: { title: 'Blood', icon: 'table' }
       },
       {
         path: 'phoneCost',
         name: 'PhoneCost',
         component: () => import('@/views/auditManage/phoneCost/index'),
-        meta: { title: 'PhoneCost', icon: 'tree' }
+        meta: { title: 'PhoneCost', icon: 'table' }
       },
       {
         path: 'donation',
         name: 'Donation',
         component: () => import('@/views/auditManage/donation/index'),
-        meta: { title: 'Donation', icon: 'tree' }
+        meta: { title: 'Donation', icon: 'table' }
       },
       {
         path: 'volunteer',
         name: 'Volunteer',
         component: () => import('@/views/auditManage/volunteer/index'),
-        meta: { title: 'Volunteer', icon: 'tree' }
+        meta: { title: 'Volunteer', icon: 'table' }
       }
     ]
   },
@@ -113,38 +113,26 @@ export const constantRoutes = [
     name: 'Videos',
     meta: {
       title: 'Videos',
-      icon: 'nested'
+      icon: 'el-icon-video-camera-solid'
     },
     children: [
       {
         path: 'fundamental',
         component: () => import('@/views/videoManage/fundamental/index'), // Parent router-view
         name: 'Fundamental',
-        meta: { title: 'fundamental' }
+        meta: { title: 'fundamental', icon: 'el-icon-s-grid' }
       },
       {
         path: 'financial',
         component: () => import('@/views/videoManage/financial/index'),
         name: 'Financial',
-        meta: { title: 'financial' }
+        meta: { title: 'financial', icon: 'el-icon-s-grid' }
       },
       {
         path: 'honesty',
         component: () => import('@/views/videoManage/honesty/index'),
         name: 'Honesty',
-        meta: { title: 'honesty' }
-      }
-    ]
-  },
-  {
-    path: '/videos',
-    component: Layout,
-    children: [
-      {
-        path: 'upload',
-        name: 'Upload',
-        component: () => import('@/views/upload/index'),
-        meta: { title: 'Upload', icon: 'form' }
+        meta: { title: 'honesty', icon: 'el-icon-s-grid' }
       }
     ]
   },
@@ -160,7 +148,18 @@ export const constantRoutes = [
       }
     ]
   },
-
+  {
+    path: '/videos',
+    component: Layout,
+    children: [
+      {
+        path: 'upload',
+        name: 'Upload',
+        component: () => import('@/views/upload/index'),
+        meta: { title: 'Upload', icon: 'el-icon-upload' }
+      }
+    ]
+  },
   {
     path: '/message',
     component: Layout,
@@ -169,7 +168,7 @@ export const constantRoutes = [
         path: 'message',
         name: 'message',
         component: () => import('@/views/message/message'),
-        meta: { title: 'System Message', icon: 'table' }
+        meta: { title: 'System Message', icon: 'el-icon-message-solid' }
       }
     ]
   },
