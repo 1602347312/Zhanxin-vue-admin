@@ -148,6 +148,18 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/appeal',
+    component: Layout,
+    children: [
+      {
+        path: 'appeal',
+        name: 'Appeal',
+        component: () => import('@/views/appealManage/index'),
+        meta: { title: 'Appeal', icon: 'form' }
+      }
+    ]
+  },
 
   {
     path: '/message',
