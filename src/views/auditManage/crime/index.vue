@@ -47,8 +47,8 @@
       </el-table-column>
     </el-table>
     <el-button-group>
-      <el-button type="primary" icon="el-icon-arrow-left" @click="leftClick">上一页</el-button>
-      <el-button type="primary" @click="rightClick" >下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+      <el-button type="primary" icon="el-icon-arrow-left" :disabled="leftDisable" @click="leftClick">上一页</el-button>
+      <el-button type="primary" :disabled="rightDisable" @click="rightClick" >下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
     </el-button-group>
   </div>
 </template>
@@ -75,7 +75,17 @@ export default {
       pageNum: 1,
       listSize: 0,
       pageSize: 10,
-      reputationType: 'criminal'
+      reputationType: 'criminal',
+      leftDisable: false,
+      rightDisable: false
+    }
+  },
+  watch: {
+    pageNum: {
+      handler() {
+        this.leftDisable = (this.pageNum - 1 <= 0)
+        this.rightDisable = (this.pageNum + 1 > Math.ceil(this.listSize / this.pageSize))
+      }
     }
   },
   created() {
@@ -95,6 +105,8 @@ export default {
       }).then(response => {
         this.list = response.data.data.data
         this.listSize = response.data.data.listSize
+        this.leftDisable = (this.pageNum - 1 <= 0)
+        this.rightDisable = (this.pageNum + 1 > Math.ceil(this.listSize / this.pageSize))
         this.listLoading = false
         console.log(this.list)
       }).catch(() => {
