@@ -40,8 +40,9 @@
       </el-table-column>
       <el-table-column align="center" prop="created_at" label="Action" width="200">
         <template slot-scope="scope">
-          <el-input v-model="validCount" placeholder="请输入内容" :disabled="Boolean(scope.row.state)" class="input-with-select">
-            <el-button slot="append" type="text" :disabled="Boolean(scope.row.state)" class="audit-button" @click="open(scope.row.certicficateId)">审核</el-button>
+          <el-input v-model="bank" placeholder="请输入银行" :disabled="Boolean(scope.row.state)"></el-input>
+          <el-input v-model="validCount" placeholder="请输入金额" :disabled="Boolean(scope.row.state)" class="input-with-select">
+            <el-button slot="append" type="text" :disabled="Boolean(scope.row.state)" class="audit-button" @click="open(scope.row.certicficateId, scope.row.userId)">审核</el-button>
           </el-input>
         </template>
       </el-table-column>
@@ -70,15 +71,16 @@ export default {
     return {
       list: null,
       listLoading: true,
-      type: 'blood',
+      type: 'bank',
       status: ['待审核', '已通过', '未通过'],
       pageNum: 1,
       listSize: 0,
       pageSize: 10,
-      reputationType: 'blood_donation',
+      reputationType: 'bank',
       validCount: 0,
       leftDisable: false,
-      rightDisable: false
+      rightDisable: false,
+      bank: ''
     }
   },
   watch: {
@@ -152,7 +154,7 @@ export default {
         this.listLoading = false
       })
     },
-    open(id) {
+    open(certificate_id, user_id) {
       this.$confirm('是否通过该证件的审核', '提示', {
         distinguishCancelAndClose: true,
         confirmButtonText: '通过',
@@ -160,13 +162,14 @@ export default {
         type: 'warning'
       }).then(() => {
         this.$axios({
-          method: 'put',
-          url: 'http://101.132.121.193:8899/admin/certificates',
+          method: 'post',
+          url: 'http://101.132.121.193:8899/admin/bankcertificates',
           params: {
-            id: id,
+            certificate_id: certificate_id,
+            user_id: user_id,
             state: 1,
-            num: this.validCount,
-            type: this.reputationType
+            money: this.validCount,
+            bank: this.bank
           }
         }).then(() => {
           this.$message({
@@ -174,18 +177,20 @@ export default {
             message: '审核通过!'
           })
           this.validCount = 0
+          this.bank = ''
           this.fetchData()
         })
       }).catch((action) => {
         if (action === 'cancel') {
           this.$axios({
-            method: 'put',
-            url: 'http://101.132.121.193:8899/admin/certificates',
+            method: 'post',
+            url: 'http://101.132.121.193:8899/admin/bankcertificates',
             params: {
-              id: id,
+              certificate_id: certificate_id,
+              user_id: user_id,
               state: 2,
-              num: 0,
-              type: this.reputationType
+              money: this.validCount,
+              bank: this.bank
             }
           }).then(() => {
             this.$message({
@@ -193,6 +198,7 @@ export default {
               message: '审核不通过!'
             })
             this.validCount = 0
+            this.bank = ''
             this.fetchData()
           })
         } else {

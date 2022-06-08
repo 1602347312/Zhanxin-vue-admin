@@ -91,6 +91,12 @@ export const constantRoutes = [
         name: 'Volunteer',
         component: () => import('@/views/auditManage/volunteer/index'),
         meta: { title: 'Volunteer', icon: 'table' }
+      },
+      {
+        path: 'bank',
+        name: 'Bank',
+        component: () => import('@/views/auditManage/bank/index'),
+        meta: { title: 'Bank', icon: 'table' }
       }
     ]
   },

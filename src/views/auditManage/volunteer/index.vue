@@ -15,7 +15,12 @@
       </el-table-column>
       <el-table-column label="Certificate">
         <template slot-scope="scope">
-          {{ scope.row.fileName }}
+          <el-image
+            style="width: 100px; height: 100px"
+            :src="scope.row.fileName"
+            :preview-src-list="[scope.row.fileName]"
+          >
+          </el-image>
         </template>
       </el-table-column>
       <el-table-column label="UserID" width="110" align="center">
