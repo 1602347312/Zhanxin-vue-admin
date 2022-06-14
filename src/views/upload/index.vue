@@ -19,8 +19,8 @@
           :on-exceed="handleExceed"
           accept=".jpg,.png,.bmp"
         >
-          <el-button slot="trigger" size="small" type="primary" class="upload-button2">选取文件</el-button>
-          <div slot="tip" class="el-upload__tip">只能上传jpg/png/bmp文件</div>
+          <el-button slot="trigger" size="small" type="primary" class="upload-button2">pick up</el-button>
+          <div slot="tip" class="el-upload__tip">only allow .jpg/.png/.bmp</div>
         </el-upload>
       </el-form-item>
       <el-form-item label="Video">
@@ -38,9 +38,8 @@
           :on-exceed="handleExceed"
           accept=".mp4"
         >
-          <el-button slot="trigger" size="small" type="primary" class="upload-button1">选取文件</el-button>
-          <el-button style="margin-left: 10px;" size="small" type="success" class="submit-button" :disabled="uploading" @click="submitUpload">上传到服务器</el-button>
-          <div slot="tip" class="el-upload__tip">大小限制为50mb</div>
+          <el-button slot="trigger" size="small" type="primary" class="upload-button1">pick up</el-button>
+          <div slot="tip" class="el-upload__tip">limit 50mb</div>
         </el-upload>
       </el-form-item>
       <el-form-item label="Video type">
@@ -53,6 +52,7 @@
       <el-form-item label="Video intro">
         <el-input v-model="form.intro" type="textarea" />
       </el-form-item>
+      <el-button  size="small" type="success" class="submit-button" :disabled="uploading" @click="submitUpload">Upload to server</el-button>
     </el-form>
   </div>
 </template>
@@ -92,7 +92,7 @@ export default {
         url: 'http://101.132.121.193:8899/admin/videos',
         data: this.form.fd
       }).then(response => {
-        this.$message({ type: 'success', message: '上传成功' })
+        this.$message({ type: 'success', message: 'success' })
         this.$refs.upload1.clearFiles()
         this.$refs.upload2.clearFiles()
         this.$refs.form1.resetFields()
@@ -103,7 +103,7 @@ export default {
         this.uploading = false
         console.log(response)
       }).catch((reason) => {
-        this.$message({ type: 'error', message: '上传失败' })
+        this.$message({ type: 'error', message: 'failed' })
         this.form.fd = new FormData()
         this.uploading = false
         console.log(reason)
@@ -116,7 +116,7 @@ export default {
       console.log(file)
     },
     handleExceed() {
-      this.$message({ type: 'error', message: '最多支持1个附件上传' })
+      this.$message({ type: 'error', message: 'allow up to 1 file' })
     }
   }
 }
@@ -127,14 +127,12 @@ export default {
   text-align: center;
 }
 .upload-button2{
-  position: fixed;
   right: 1645px;
   bottom: 800px;
 }
 .submit-button{
-  position: fixed;
-  right: 1610px;
-  bottom: 330px;
+  margin-right: 1200px;
+  margin-bottom: 330px;
 }
 </style>
 

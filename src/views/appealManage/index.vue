@@ -42,13 +42,13 @@
       </el-table-column>
       <el-table-column align="center" prop="created_at" label="Action" width="200">
         <template slot-scope="scope">
-          <el-button type="text" :disabled="scope.row.appeal_state" @click="open(scope.row.user_id,scope.row.reason,scope.row.question,scope.row.require,scope.row.appeal_time)">审核</el-button>
+          <el-button type="text" :disabled="scope.row.appeal_state" @click="open(scope.row.user_id,scope.row.reason,scope.row.question,scope.row.require,scope.row.appeal_time)">Verify</el-button>
         </template>
       </el-table-column>
     </el-table>
     <el-button-group>
-      <el-button type="primary" icon="el-icon-arrow-left" :disabled="leftDisable" @click="leftClick">上一页</el-button>
-      <el-button type="primary" :disabled="rightDisable" @click="rightClick">下一页<i class="el-icon-arrow-right el-icon--right" /></el-button>
+      <el-button type="primary" icon="el-icon-arrow-left" :disabled="leftDisable" @click="leftClick">Prev</el-button>
+      <el-button type="primary" :disabled="rightDisable" @click="rightClick">Next<i class="el-icon-arrow-right el-icon--right" /></el-button>
     </el-button-group>
   </div>
 </template>
@@ -71,7 +71,7 @@ export default {
       list: null,
       listLoading: true,
       type: 'all',
-      status: ['待审核', '已通过', '未通过'],
+      status: ['Pending', 'Passed', 'Failed'],
       pageNum: 1,
       listSize: 0,
       pageSize: 10,
@@ -151,10 +151,10 @@ export default {
       })
     },
     open(user_id, reason, question, require, appeal_time) {
-      this.$confirm('是否通过该申诉的审核', '提示', {
+      this.$confirm('Sure to confirm?', 'Waring', {
         distinguishCancelAndClose: true,
-        confirmButtonText: '通过',
-        cancelButtonText: '不通过',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
         type: 'warning'
       }).then(() => {
         this.$axios({
@@ -171,7 +171,7 @@ export default {
         }).then(() => {
           this.$message({
             type: 'success',
-            message: '审核通过!'
+            message: 'Success!'
           })
           this.fetchData()
         })
@@ -191,14 +191,14 @@ export default {
           }).then(() => {
             this.$message({
               type: 'error',
-              message: '审核不通过!'
+              message: 'Denied!'
             })
             this.fetchData()
           })
         } else {
           this.$message({
             type: 'info',
-            message: '操作取消'
+            message: 'Canceled'
           })
         }
       })

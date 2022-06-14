@@ -12,10 +12,10 @@
             <div class="bottom clearfix">
               <time class="time">{{ video.videoTime }}</time>
               <el-popconfirm
-                title="确定删除该视频吗？"
+                title="Sure to delete？"
                 @onConfirm="deleteVideo(video.videoId)"
               >
-                <el-button slot="reference" type="text" class="button">删除视频</el-button>
+                <el-button slot="reference" type="text" class="button">delete</el-button>
               </el-popconfirm>
 <!--              <el-button type="text" class="button" @click="deleteVideo(video.videoId)">删除视频</el-button>-->
             </div>
@@ -23,7 +23,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-button type="primary" class="jump-to-upload" @click="jump">上传<i class="el-icon-upload el-icon--right"></i></el-button>
+    <el-button type="primary" class="jump-to-upload" @click="jump">upload<i class="el-icon-upload el-icon--right"></i></el-button>
   </div>
 </template>
 
@@ -63,7 +63,7 @@ export default {
         url: 'http://101.132.121.193:8899/admin/videos' + '/' + id
         // headers: { token: window.sessionStorage.getItem('token') }
       }).then(response => {
-        alert('删除成功')
+        alert('success')
         this.getVideoList()
       })
     },
