@@ -1,16 +1,16 @@
 <template>
   <div class="message-container">
-    <div id="box" class="block">&ensp;</div><div class="block" style="margin: 5px 0px 0px 20px;">发布系统消息</div>
+    <div id="box" class="block">&ensp;</div><div class="block" style="margin: 5px 0px 0px 20px;">Publish Message</div>
     <div class="messageBody">
       <el-row id="inputtitle">
-        <el-input placeholder="请输入标题" v-model="textarea1">请输入标题</el-input>
+        <el-input placeholder="title" v-model="textarea1">please enter title</el-input>
       </el-row>
       <el-row id="inputtext">
-        <el-input type="textarea" :autosize="{ minRows: 10, maxRows: 15}" placeholder="请输入内容" v-model="textarea2"></el-input>
+        <el-input type="textarea" :autosize="{ minRows: 10, maxRows: 15}" placeholder="content" v-model="textarea2"></el-input>
       </el-row>
       <el-row id="el-button">
-        <el-button @click="clear">清空</el-button>
-        <el-button @click="release">发布</el-button>
+        <el-button @click="clear">clear</el-button>
+        <el-button @click="release">publish</el-button>
       </el-row>
     </div>
   </div>
@@ -28,8 +28,8 @@ export default {
   methods: {
     open1() {
       this.$notify({
-        title: '成功',
-        message: '发布成功！',
+        title: 'success',
+        message: 'Success！',
         type: 'success'
       })
     },

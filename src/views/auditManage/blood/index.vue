@@ -40,15 +40,15 @@
       </el-table-column>
       <el-table-column align="center" prop="created_at" label="Action" width="200">
         <template slot-scope="scope">
-          <el-input v-model="validCount" placeholder="请输入内容" :disabled="Boolean(scope.row.state)" class="input-with-select">
-            <el-button slot="append" type="text" :disabled="Boolean(scope.row.state)" class="audit-button" @click="open(scope.row.certicficateId)">审核</el-button>
+          <el-input v-model="validCount" placeholder="count" :disabled="Boolean(scope.row.state)" class="input-with-select">
+            <el-button slot="append" type="text" :disabled="Boolean(scope.row.state)" class="audit-button" @click="open(scope.row.certicficateId)">Verify</el-button>
           </el-input>
         </template>
       </el-table-column>
     </el-table>
     <el-button-group>
-      <el-button type="primary" icon="el-icon-arrow-left" :disabled="leftDisable" @click="leftClick">上一页</el-button>
-      <el-button type="primary" :disabled="rightDisable" @click="rightClick">下一页<i class="el-icon-arrow-right el-icon--right" /></el-button>
+      <el-button type="primary" icon="el-icon-arrow-left" :disabled="leftDisable" @click="leftClick">Prev</el-button>
+      <el-button type="primary" :disabled="rightDisable" @click="rightClick">Next<i class="el-icon-arrow-right el-icon--right" /></el-button>
     </el-button-group>
   </div>
 </template>
@@ -71,7 +71,7 @@ export default {
       list: null,
       listLoading: true,
       type: 'blood',
-      status: ['待审核', '已通过', '未通过'],
+      status: ['Pending', 'Passed', 'Failed'],
       pageNum: 1,
       listSize: 0,
       pageSize: 10,
@@ -153,10 +153,10 @@ export default {
       })
     },
     open(id) {
-      this.$confirm('是否通过该证件的审核', '提示', {
+      this.$confirm('Sure to confirm?', 'Info', {
         distinguishCancelAndClose: true,
-        confirmButtonText: '通过',
-        cancelButtonText: '不通过',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
         type: 'warning'
       }).then(() => {
         this.$axios({
@@ -171,7 +171,7 @@ export default {
         }).then(() => {
           this.$message({
             type: 'success',
-            message: '审核通过!'
+            message: 'success!'
           })
           this.validCount = 0
           this.fetchData()
@@ -190,7 +190,7 @@ export default {
           }).then(() => {
             this.$message({
               type: 'error',
-              message: '审核不通过!'
+              message: 'denied!'
             })
             this.validCount = 0
             this.fetchData()
@@ -198,7 +198,7 @@ export default {
         } else {
           this.$message({
             type: 'info',
-            message: '操作取消'
+            message: 'canceled'
           })
         }
       })
