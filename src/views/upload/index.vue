@@ -39,7 +39,7 @@
           accept=".mp4"
         >
           <el-button slot="trigger" size="small" type="primary" class="upload-button1">选取文件</el-button>
-          <el-button style="margin-left: 10px;" size="small" type="success" class="submit-button" :disabled="uploading" @click="submitUpload">上传到服务器</el-button>
+          
           <div slot="tip" class="el-upload__tip">大小限制为50mb</div>
         </el-upload>
       </el-form-item>
@@ -53,6 +53,7 @@
       <el-form-item label="Video intro">
         <el-input v-model="form.intro" type="textarea" />
       </el-form-item>
+      <el-button size="small" type="success" class="submit-button" :disabled="uploading" @click="submitUpload">上传到服务器</el-button>
     </el-form>
   </div>
 </template>
@@ -123,18 +124,23 @@ export default {
 </script>
 
 <style scoped>
+.upload-button2 {
+    /* position: fixed; */
+    left: 190px;
+    top: 142px;
+}
 .line{
   text-align: center;
 }
-.upload-button2{
+/* .upload-button2{
   position: fixed;
   right: 1645px;
   bottom: 800px;
-}
+} */
 .submit-button{
-  position: fixed;
-  right: 1610px;
-  bottom: 330px;
+  /* position: fixed; */
+  margin-left: 1050px;
+  margin-top: 30px;
 }
 </style>
 
